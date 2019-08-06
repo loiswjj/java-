@@ -1,0 +1,18 @@
+1. JDK 与 JRE有什么区别？
+JDK（Java Development Kit）: java开发工具包，其包含了JRE以及java的开发环境，包含了各种类库以及工具
+JRE （Java Runtime Environment）：java 运行所需环境，JRE里面包含了JVM以及java程序运行时所需的类库
+
+如果是仅仅想要运行java项目而不是开发java程序，仅需要下载jre即可
+PS：如果想要运行tomcat项目需要下载jdk，因为tomcat中的servlet需要先使用java进行编译
+
+2. java中的包装类与基础数据类型
+基础数据类型包括：int、float、double、long、short、byte、char、boolean
+其对应的包装类分别为：Integer、Float、Double、Long、Short、Byte、Character、Boolean
+
+什么叫装箱？什么叫拆箱？
+装箱就是将基础类型包装为包装类： Integer a = 1;
+拆箱就是将包装类转化为基础数据类型： int b = a;
+
+3. 怎么理解java的多态？
+
+4. java的接口与抽象类有什么区别？
