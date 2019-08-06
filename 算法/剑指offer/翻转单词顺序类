@@ -1,0 +1,28 @@
+public class Solution {
+    public String ReverseSentence(String str) {
+        char[] arr = str.toCharArray();
+        /**
+        * 思路 ： 首先将数组整体翻转，然后对每个单词在进行一次翻转
+        **/
+        reverse(arr,0,arr.length-1);
+        int pre = 0;
+        for(int i = 0; i < arr.length;i++){
+            if(arr[i] == ' '){
+                reverse(arr,pre,i-1); pre = i+1;
+            }
+        }
+        reverse(arr,pre,arr.length-1);
+        return new String(arr);
+    }
+    
+    private void reverse(char[] arr,int start,int end){
+        while(start<end){
+            //交换
+            char c = arr[start];
+            arr[start] = arr[end];
+            arr[end] = c;
+            start++;
+            end--;
+        }
+    }
+}
