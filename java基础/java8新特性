@@ -40,9 +40,9 @@ lambda 表达式的语法格式如下：
 java8新增函数式接口： java.util.function
 Predicate <T> 接口是一个函数式接口，它接受一个输入参数 T，返回一个布尔值结果。（java.util.function.Predicate）
 
-4. 新工具 − 新的编译工具，如：Nashorn引擎 jjs、 类依赖分析器jdeps。
+5. 新工具 − 新的编译工具，如：Nashorn引擎 jjs、 类依赖分析器jdeps。
 
-5. Stream API −新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。
+6. Stream API −新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中。
 Stream（流）是一个来自数据源的元素队列并支持聚合操作
 
 元素是特定类型的对象，形成一个队列。 Java中的Stream并不会存储元素，而是按需计算。
@@ -55,10 +55,10 @@ Pipelining: 中间操作都会返回流对象本身。 这样多个操作可以�
 内部迭代： 以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代， 这叫做外部迭代。 Stream提供了内部
 迭代的方式， 通过访问者模式(Visitor)实现。
 
-6. 日期类添加了本地日期类以及带有时区的日期类
+7. 日期类添加了本地日期类以及带有时区的日期类
 LocalDateTime、LocalDate、ZoneDateTime
 
-7. Optional 类 − Optional 类已经成为 Java 8 类库的一部分，用来解决空指针异常。
+8. Optional 类 − Optional 类已经成为 Java 8 类库的一部分，用来解决空指针异常。
 // Optional.ofNullable - 允许传递为 null 参数
 Optional<Integer> a = Optional.ofNullable(null);
 // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException
@@ -69,4 +69,4 @@ Integer value1 = a.orElse(new Integer(0));
 //Optional.get - 获取值，值需要存在
 Integer value2 = b.get();
 
-8. Nashorn, JavaScript 引擎 − Java 8提供了一个新的Nashorn javascript引擎，它允许我们在JVM上运行特定的javascript应用。
+9. Nashorn, JavaScript 引擎 − Java 8提供了一个新的Nashorn javascript引擎，它允许我们在JVM上运行特定的javascript应用。
