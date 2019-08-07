@@ -1,0 +1,13 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int fristBuy = Integer.MIN_VALUE, fristSell = 0;
+        int secBuy = Integer.MIN_VALUE, secSell = 0;
+        for(int price: prices){
+            fristBuy = Math.max(fristBuy,-price);
+            fristSell = Math.max(fristSell,fristBuy+price);
+            secBuy = Math.max(secBuy,fristSell-price);
+            secSell = Math.max(secSell, secBuy+price);
+        }
+        return secSell;
+    }
+}
