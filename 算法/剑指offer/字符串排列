@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+public class Solution {
+    ArrayList<String> res = new ArrayList<>();
+    int[] flag ;
+    public ArrayList<String> Permutation(String str) {
+        if(str == null || str.length() == 0) return res;
+       flag = new int[str.length()];
+       backstrack(str,"");
+       return res;
+    }
+    
+    private void backstrack(String str,String s){
+        if(str.length() == s.length()) {
+            if(!res.contains(s)){
+                res.add(s);
+            }
+            return;
+        }
+        for(int i = 0; i < str.length(); i++){
+            if(flag[i] == 0){
+                flag[i] = 1;
+                backstrack(str,s+str.substring(i,i+1));
+                flag[i] = 0;
+            }
+        }
+    }
+}
