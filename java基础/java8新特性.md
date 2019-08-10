@@ -1,6 +1,5 @@
 1. 接口可以有默认实现方法
 public interface formula {
-    
     default int add(int x,int y){
         return x+y;
     }
