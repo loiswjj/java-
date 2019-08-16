@@ -5,17 +5,17 @@ java1.8之后方法区在直接内存上面划分出来一块元数据用于之�
 . 程序计数器：是一块较小的内存空间，他可以被看作是当前线程所执行的字节码的行号指示器。（字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等功能都需要依赖这个计数器来完成）
 PS： 这是为一个在java虚拟机规范中没有规定OutOfMemory的区域
 
-. 虚拟机栈：生命周期与线程相同。java的虚拟机栈描述的是java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧，用于存储局部变量表、操作数栈、动态链接、方法的出口等信息。每一个方法从调用直至执行完成的过程，就对应一个栈帧在虚拟机栈中入栈到出栈的过程。
+- 虚拟机栈：生命周期与线程相同。java的虚拟机栈描述的是java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧，用于存储局部变量表、操作数栈、动态链接、方法的出口等信息。每一个方法从调用直至执行完成的过程，就对应一个栈帧在虚拟机栈中入栈到出栈的过程。
 PS： 局部变量表存放了编译期可知的各种基本数据类型、对象的引用（reference）以及returnAddress类型（指向了一条字节码指令的地址）。在这个区域规定了两种异常：StackOverFlowError和OutOfMemoryError
 
-. 本地方法栈：与虚拟机栈发挥的作用类似，他们之间的区别在于虚拟机栈为虚拟机执行java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的native方法服务
+- 本地方法栈：与虚拟机栈发挥的作用类似，他们之间的区别在于虚拟机栈为虚拟机执行java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的native方法服务
 PS：这个区域同虚拟机栈一样规定了两种异常：StackOverflowError和OutOfMemoryError
 
-. 堆：java（Heap）是java虚拟机所管理的内存中最大的一块。java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。（java虚拟机规范描述：所有对象实例以及数组都）要在对上分配，但是随着JIT编译器的反正和逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术会导致一些微妙变化）
+- 堆：java（Heap）是java虚拟机所管理的内存中最大的一块。java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。（java虚拟机规范描述：所有对象实例以及数组都）要在对上分配，但是随着JIT编译器的反正和逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术会导致一些微妙变化）
 java堆可以处于物理上不连续的内存空间，只要逻辑上是连续的即可，可以通过-Xmx和-Xms控制
 PS：如果在堆中没有内存完成实例分配，并且堆无法在扩展，就会抛出OutOfMemoryError
 
-. 方法区：虚拟机加载的类信息、常量池、静态变量、即时编译后的代码（Non-Heap）；这个区域的内存回收目标主要是针对常量池的回收与对类型的卸载。-XX:PermSize 和 -XX：MaxPermSize来控制方法区的大小
+- 方法区：虚拟机加载的类信息、常量池、静态变量、即时编译后的代码（Non-Heap）；这个区域的内存回收目标主要是针对常量池的回收与对类型的卸载。-XX:PermSize 和 -XX：MaxPermSize来控制方法区的大小
 PS：方法区无法满足内存分配要求就会抛出OutOfMemoryError
 
 ### 2. java的类加载机制
@@ -113,10 +113,20 @@ h) 方法表集合
 i) 属性表集合
 
 ### 12. JDK自带的JVM监控和性能分析工具
-a) Jps（JVM Process Status Tool）:虚拟机进程状态工具，可以列出正在运行的虚拟机进程，并显示虚拟机执行主类名称以及这些进程的本地虚拟机唯一ID。Jps可以通过RMI协议查询开启了RMI服务的远程虚拟机进程状态
-b) Jstat(JVM Statistics Monitoring Tool):是用于监视虚拟机各种运行状态信息的命令行工具。可以显示本地或者远程虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。
-c) Jinfo(Configuration Info for Java):实时查看和调整虚拟机各项参数。Jps可以查看显式指定参数，Jinfo可以查看未被显式指定参数的系统默认值。
-d) Jmap(Memory Map for Java):用于生成堆转储快照（一般为headdump或dump文件），此外还可以查询finalize执行队列、java堆和永久代的详细信息，如空间使用率、当前用的是那种收集器等。
-e) Jhat(JVM Heap Analysis Tool):Jhat命令与Jmap命令搭配使用，来分析Jmap生成的堆转储快照。
-f) Jstack（Stack Trace for Java）：用于生成虚拟机当前时刻的线程快照（一般称为threaddump或者javacore文件）。线程快照就是当前虚拟机内每一条线程正在执行的方法堆栈集合。（Tips：JDK1.5 java.lang.Thread类新增getAllStackTraces()方法用于获取虚拟机中所有线程的StackTraceElement对象）
+- Jps（JVM Process Status Tool）:虚拟机进程状态工具，可以列出正在运行的虚拟机进程，并显示虚拟机执行主类名称以及这些进程的本地虚拟机唯一ID。Jps可以通过RMI协议查询开启了RMI服务的远程虚拟机进程状态
+- Jstat(JVM Statistics Monitoring Tool):是用于监视虚拟机各种运行状态信息的命令行工具。可以显示本地或者远程虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。
+- Jinfo(Configuration Info for Java):实时查看和调整虚拟机各项参数。Jps可以查看显式指定参数，Jinfo可以查看未被显式指定参数的系统默认值。
+- Jmap(Memory Map for Java):用于生成堆转储快照（一般为headdump或dump文件），此外还可以查询finalize执行队列、java堆和永久代的详细信息，如空间使用率、当前用的是那种收集器等。
+- Jhat(JVM Heap Analysis Tool):Jhat命令与Jmap命令搭配使用，来分析Jmap生成的堆转储快照。
+- Jstack（Stack Trace for Java）：用于生成虚拟机当前时刻的线程快照（一般称为threaddump或者javacore文件）。线程快照就是当前虚拟机内每一条线程正在执行的方法堆栈集合。（Tips：JDK1.5 java.lang.Thread类新增getAllStackTraces()方法用于获取虚拟机中所有线程的StackTraceElement对象）
 g) hsdis: JIT反编译插件
+
+### 13. minor GC的触发条件
+Eden区满了
+
+### 14. Full GC触发条件
+- 程序调用了System.gc()
+- 老年代区满了
+- 方法区满了
+- 当分配一个很大的对象，Eden区放不下，进行过minor GC后依然放不下，如果老年代的剩余空间比当前对象大小还小
+- 当老年代的剩余空间大小比survivor区历次晋升老年代的平均大小还要小
